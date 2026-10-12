@@ -1,6 +1,6 @@
 # Deploy and Host Documenso on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/documenso-production?utm_medium=integration&utm_source=button&utm_campaign=documenso-production)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/documenso-production?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=documenso-production)
 
 [Documenso](https://documenso.com/) is the open-source DocuSign alternative. Upload a PDF, place signature, initials, date and text fields, and send it to one or more recipients in order. Each signed document comes back sealed with a digital signature and a signing certificate, with an audit log of every view and signature. It also has reusable templates, direct signing links, teams and a REST API with webhooks. This template runs the official Documenso image with Postgres, and creates both the signing certificate and your admin account on first boot, so you can sign in and seal documents right away, even without an email provider.
 
