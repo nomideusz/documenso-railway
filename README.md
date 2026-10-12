@@ -49,7 +49,7 @@ The stack is two services: Documenso and Postgres.
 
 **Back up.** Postgres holds every document. The volume holds the signing certificate. Also keep `NEXT_PRIVATE_ENCRYPTION_KEY` and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`, which encrypt stored 2FA secrets and tokens.
 
-**Resources.** In local testing, after signing and sealing a document, Documenso used about 600 MB of RAM and Postgres about 65 MB. That is over the Trial plan's 512 MB per service, so use the Hobby plan or above.
+**Resources.** On Railway, after signing and sealing a document, Documenso used about 480 MB of RAM (peaking at about 510 MB) and Postgres about 130 MB. That is at the Trial plan's 512 MB per-service limit, so use the Hobby plan or above.
 
 ## Why Deploy Documenso on Railway?
 
