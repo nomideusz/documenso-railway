@@ -138,6 +138,11 @@
           "defaultValue": "",
           "description": "Sender address, e.g. noreply@example.com",
           "isOptional": true
+        },
+        "DOCUMENSO_DISABLE_TELEMETRY": {
+          "defaultValue": "",
+          "description": "Set to true to stop Documenso's anonymous usage telemetry (app version and installation ID only)",
+          "isOptional": true
         }
       }
     },

@@ -45,6 +45,8 @@ The stack is two services: Documenso and Postgres.
 
 **Custom domain.** After adding one, set `NEXT_PUBLIC_WEBAPP_URL` to `https://your-domain`. Documenso uses it for signing links, emails and its sign-in origin check.
 
+**Telemetry.** Documenso sends anonymous usage data (app version and installation ID) by default. Set `DOCUMENSO_DISABLE_TELEMETRY=true` to turn it off.
+
 **Back up.** Postgres holds every document. The volume holds the signing certificate. Also keep `NEXT_PRIVATE_ENCRYPTION_KEY` and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`, which encrypt stored 2FA secrets and tokens.
 
 **Resources.** In local testing, after signing and sealing a document, Documenso used about 600 MB of RAM and Postgres about 65 MB. That is over the Trial plan's 512 MB per service, so use the Hobby plan or above.
