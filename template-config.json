@@ -1,0 +1,194 @@
+{
+  "services": {
+    "5ddbeaf2-7001-4f5f-8270-5ea6ffdf6ed8": {
+      "icon": "https://raw.githubusercontent.com/nomideusz/documenso-railway/main/icon.svg",
+      "name": "Documenso",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": "/api/health",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "repo": "https://github.com/nomideusz/documenso-railway"
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>": {}
+        }
+      },
+      "volumeMounts": {
+        "e778279f-17cf-4600-a6e8-32425c438884": {
+          "mountPath": "/opt/documenso"
+        }
+      },
+      "variables": {
+        "PORT": {
+          "defaultValue": "3000",
+          "description": "Port Documenso listens on - leave as is",
+          "isOptional": false
+        },
+        "DOCUMENSO_ADMIN_EMAIL": {
+          "defaultValue": "",
+          "description": "Your email - the admin account, created and verified on first boot so you can sign in without SMTP",
+          "isOptional": false
+        },
+        "DOCUMENSO_ADMIN_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Admin password, set on first boot only - copy it from here to sign in, then change it in Documenso",
+          "isOptional": false
+        },
+        "NEXT_PUBLIC_WEBAPP_URL": {
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public URL of Documenso (signing links, emails, sign-in) - set it to your custom domain after adding one",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_INTERNAL_WEBAPP_URL": {
+          "defaultValue": "http://localhost:3000",
+          "description": "How Documenso reaches itself for background jobs and fonts - must use PORT",
+          "isOptional": false
+        },
+        "NEXTAUTH_SECRET": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Signs session cookies - changing it logs everyone out",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_ENCRYPTION_KEY": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Encrypts stored secrets such as 2FA keys. BACK IT UP - changing it breaks existing 2FA and stored credentials",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Encrypts short-lived tokens - must differ from NEXT_PRIVATE_ENCRYPTION_KEY",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_DATABASE_URL": {
+          "defaultValue": "postgresql://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}",
+          "description": "Postgres on the private network (documents are stored in the database)",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_SIGNING_TRANSPORT": {
+          "defaultValue": "local",
+          "description": "Seal signed documents with the certificate file on the volume",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH": {
+          "defaultValue": "/opt/documenso/cert.p12",
+          "description": "Signing certificate - a self-signed one is created here on first boot; replace the file to use your own",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_SIGNING_PASSPHRASE": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Passphrase of the signing certificate - set before first boot, it must match the .p12 file",
+          "isOptional": false
+        },
+        "NEXT_PUBLIC_DISABLE_SIGNUP": {
+          "defaultValue": "true",
+          "description": "Public sign-up is closed; set to false to let teammates register (they need SMTP to verify their email)",
+          "isOptional": false
+        },
+        "RAILWAY_HEALTHCHECK_TIMEOUT_SEC": {
+          "defaultValue": "600",
+          "description": "First boot runs the database migrations before the health check can pass",
+          "isOptional": false
+        },
+        "NEXT_PRIVATE_SMTP_TRANSPORT": {
+          "defaultValue": "smtp-auth",
+          "description": "smtp-auth for SMTP, or resend to send over HTTPS with NEXT_PRIVATE_RESEND_API_KEY (works on every Railway plan)",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_HOST": {
+          "defaultValue": "",
+          "description": "SMTP server for signing invitations and notifications (Railway allows outbound SMTP on Pro only)",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_PORT": {
+          "defaultValue": "587",
+          "description": "SMTP port",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_SECURE": {
+          "defaultValue": "false",
+          "description": "true for implicit TLS (port 465), false for STARTTLS (587)",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_USERNAME": {
+          "defaultValue": "",
+          "description": "SMTP username",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_PASSWORD": {
+          "defaultValue": "",
+          "description": "SMTP password",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_RESEND_API_KEY": {
+          "defaultValue": "",
+          "description": "Resend API key, used when NEXT_PRIVATE_SMTP_TRANSPORT=resend",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_FROM_NAME": {
+          "defaultValue": "Documenso",
+          "description": "Sender name for Documenso emails",
+          "isOptional": true
+        },
+        "NEXT_PRIVATE_SMTP_FROM_ADDRESS": {
+          "defaultValue": "",
+          "description": "Sender address, e.g. noreply@example.com",
+          "isOptional": true
+        }
+      }
+    },
+    "a2502312-52ea-45a6-8d18-e458a3c57234": {
+      "icon": "https://devicons.railway.app/i/postgresql.svg",
+      "name": "Postgres",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "postgres:17.11-alpine"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "volumeMounts": {
+        "194ec7a9-558b-4d01-8f1b-3a9128c0b801": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      },
+      "variables": {
+        "POSTGRES_DB": {
+          "defaultValue": "documenso",
+          "description": "Database name",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "documenso",
+          "description": "Database user",
+          "isOptional": false
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Auto-generated database password",
+          "isOptional": false
+        },
+        "PGDATA": {
+          "defaultValue": "/var/lib/postgresql/data/pgdata",
+          "description": "Data subdirectory - keeps Postgres happy on Railway volumes",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time for Postgres to shut down cleanly on redeploy",
+          "isOptional": false
+        }
+      }
+    }
+  }
+}
