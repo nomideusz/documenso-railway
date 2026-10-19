@@ -8,7 +8,7 @@
 
 The stack is two services: Documenso and Postgres.
 
-- **Upstream's image, pinned.** Documenso runs from the official `documenso/documenso` image at a fixed release (v2.20.0), not `latest`. A thin wrapper ([source](https://github.com/nomideusz/documenso-railway)) adds one entrypoint script for the first-boot steps below. Upgrading means bumping the tag.
+- **Upstream's image, pinned.** Documenso runs from the official `documenso/documenso` image at a fixed release (v2.20.0), not `latest`. A thin wrapper ([source](https://github.com/two-workspaces/documenso)) adds one entrypoint script for the first-boot steps below. Upgrading means bumping the tag.
 - **A signing certificate on first boot.** Documenso can't seal documents without a `.p12` certificate, and that is normally a manual OpenSSL step. On first boot the entrypoint creates a self-signed RSA certificate (valid 10 years, named after your domain) on a volume at `/opt/documenso/cert.p12`, protected by a generated passphrase. Later boots reuse it.
 - **An admin who can sign in without SMTP.** Documenso only lets verified email addresses sign in, so a fresh install with no mail server has no working login. On first boot the entrypoint signs up `DOCUMENSO_ADMIN_EMAIL` through Documenso's own sign-up endpoint, on a port Railway doesn't route, then marks the email as verified and grants the account admin rights.
 - **Sign-up closed.** Public sign-up is off by default (`NEXT_PUBLIC_DISABLE_SIGNUP=true`), so a stranger who finds your URL can't create an account on your instance. People you send documents to don't need an account to sign.
@@ -31,7 +31,7 @@ The stack is two services: Documenso and Postgres.
 
 - [Documenso self-hosting documentation](https://docs.documenso.com/developers/self-hosting)
 - [Documenso on GitHub](https://github.com/documenso/documenso)
-- [Template source on GitHub](https://github.com/nomideusz/documenso-railway)
+- [Template source on GitHub](https://github.com/two-workspaces/documenso)
 
 ### Implementation Details
 

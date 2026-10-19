@@ -1,7 +1,7 @@
 {
   "services": {
     "5ddbeaf2-7001-4f5f-8270-5ea6ffdf6ed8": {
-      "icon": "https://raw.githubusercontent.com/nomideusz/documenso-railway/main/icon.svg",
+      "icon": "https://raw.githubusercontent.com/two-workspaces/documenso/main/icon.svg",
       "name": "Documenso",
       "build": {},
       "deploy": {
@@ -11,7 +11,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "repo": "https://github.com/nomideusz/documenso-railway"
+        "repo": "https://github.com/two-workspaces/documenso"
       },
       "networking": {
         "serviceDomains": {

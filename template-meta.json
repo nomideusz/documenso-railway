@@ -3,7 +3,7 @@
   "short_name": "Documenso Production",
   "description": "E-signatures on your own server, with the signing certificate made on boot",
   "category": "Other",
-  "image": "https://raw.githubusercontent.com/nomideusz/documenso-railway/main/icon.svg",
+  "image": "https://raw.githubusercontent.com/two-workspaces/documenso/main/icon.svg",
   "card_desc": "Documenso: the open-source DocuSign alternative. Send PDFs for signature and get them back digitally sealed, with the signing certificate and your admin account created on first boot.",
   "deploy_marker": "nomideusz/documenso-railway",
   "id": "f8485686-be8b-4b3e-86f7-5f7ca75089ff",
